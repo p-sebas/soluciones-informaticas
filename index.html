@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soluciones Informáticas · Mantenimiento PC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: #f4f7fc;
+            color: #1e2a3a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: #0066b3;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* ========== HEADER ========== */
+        header {
+            background: linear-gradient(145deg, #0b1a2b, #1c3a5a);
+            color: #fff;
+            padding: 2rem 0 1.8rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #e8f0fe;
+            font-weight: 500;
+            font-size: 1.05rem;
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        nav a:hover {
+            border-bottom-color: #7ab7ff;
+            text-decoration: none;
+        }
+
+        /* SVG animado en header */
+        .header-svg {
+            position: absolute;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.15;
+            pointer-events: none;
+            width: 180px;
+            height: 180px;
+        }
+        .header-svg .gear {
+            animation: spin 12s linear infinite;
+            transform-origin: center;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .header-svg { display: none; }
+            .header-flex { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            nav ul { gap: 1.2rem; }
+            h1 { font-size: 2rem; }
+        }
+
+        /* ========== SECCIONES Y ANIMACIONES ========== */
+        section {
+            padding: 3.5rem 0;
+            border-bottom: 1px solid #dde4ec;
+        }
+        section:last-of-type { border-bottom: none; }
+
+        h2 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #0b2a44;
+            margin-bottom: 1.8rem;
+            letter-spacing: -0.3px;
+            border-left: 6px solid #2a7fcc;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: #1a3b5a;
+            margin-top: 1.2rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 1.8rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #e9eef4;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+
+        .tools-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .tool-item {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem 1.8rem;
+            border: 1px solid #e2e9f2;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+        .tool-item:hover {
+            box-shadow: 0 8px 20px rgba(0,60,120,0.08);
+            transform: translateY(-3px);
+        }
+
+        .tool-item h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge {
+            background: #d4e3fd;
+            color: #004080;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.15rem 0.7rem;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+
+        .tool-item .url {
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        /* Tips */
+        .tips-list {
+            list-style: none;
+            counter-reset: tip-counter;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .tips-list li {
+            counter-increment: tip-counter;
+            background: #ffffff;
+            padding: 1.2rem 2rem 1.2rem 4.5rem;
+            border-radius: 10px;
+            border: 1px solid #e2e9f2;
+            position: relative;
+            font-size: 1.05rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.02);
+            transition: background 0.2s;
+        }
+        .tips-list li:hover {
+            background: #f6faff;
+        }
+
+        .tips-list li::before {
+            content: counter(tip-counter);
+            position: absolute;
+            left: 1.2rem;
+            top: 1.2rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #2a7fcc;
+            opacity: 0.4;
+            line-height: 1;
+        }
+
+        .tips-list li strong {
+            color: #0b2a44;
+        }
+
+        /* ========== ANIMACIONES SCROLL ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            will-change: opacity, transform;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Retrasos escalonados para elementos de lista */
+        .reveal-stagger {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            will-change: opacity, transform;
+        }
+        .reveal-stagger.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ========== SVG GRÁFICOS ========== */
+        .svg-graphic {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .svg-graphic svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Barras animadas en el SVG de métricas */
+        .bar-anim {
+            animation: growBar 1.2s ease forwards;
+            transform-origin: bottom;
+            opacity: 0;
+        }
+        .bar-anim:nth-child(1) { animation-delay: 0.1s; }
+        .bar-anim:nth-child(2) { animation-delay: 0.3s; }
+        .bar-anim:nth-child(3) { animation-delay: 0.5s; }
+        .bar-anim:nth-child(4) { animation-delay: 0.7s; }
+        .bar-anim:nth-child(5) { animation-delay: 0.9s; }
+
+        @keyframes growBar {
+            0% { transform: scaleY(0); opacity: 0; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+
+        .gear-small {
+            animation: spin 8s linear infinite;
+            transform-origin: center;
+        }
+
+        /* ========== FOOTER ========== */
+        footer {
+            background: #0b1a2b;
+            color: #b6c9e0;
+            padding: 2rem 0;
+            text-align: center;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+        }
+        footer a { color: #8bb9ff; }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .grid-2col { grid-template-columns: 1fr; }
+            .tools-list { grid-template-columns: 1fr; }
+            .tips-list li { padding-left: 3.2rem; }
+            .tips-list li::before { left: 1rem; font-size: 1.3rem; top: 1rem; }
+            h2 { font-size: 1.8rem; }
+        }
+        @media (max-width: 480px) {
+            header h1 { font-size: 1.8rem; }
+            .card { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-flex">
+            <div>
+                <h1>Soluciones Informáticas</h1>
+                <p>Mantenimiento preventivo · correctivo · optimización</p>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#mantenimiento">Mantenimiento</a></li>
+                    <li><a href="#herramientas">Herramientas</a></li>
+                    <li><a href="#tips">Tips</a></li>
+                </ul>
+            </nav>
+        </div>
+        <!-- SVG engranaje animado -->
+        <div class="header-svg">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="gear">
+                    <circle cx="50" cy="50" r="20" fill="none" stroke="#7ab7ff" stroke-width="4"/>
+                    <circle cx="50" cy="50" r="8" fill="#7ab7ff"/>
+                    <path d="M50 10 L50 22 M50 78 L50 90 M10 50 L22 50 M78 50 L90 50 
+                             M20 20 L28 28 M72 72 L80 80 M20 80 L28 72 M72 28 L80 20" 
+                          stroke="#7ab7ff" stroke-width="5" stroke-linecap="round"/>
+                </g>
+            </svg>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- ===== SECCIÓN MANTENIMIENTO ===== -->
+        <section id="mantenimiento">
+            <h2 class="reveal">Mantenimiento preventivo y correctivo</h2>
+            <div class="grid-2col">
+                <div class="card reveal" style="transition-delay: 0.1s;">
+                    <h3>🔧 Preventivo</h3>
+                    <p>Consiste en acciones programadas para <strong>evitar fallos</strong> y alargar la vida útil del equipo. Incluye:</p>
+                    <ul style="margin-left: 1.2rem; margin-top: 0.3rem;">
+                        <li>Limpieza física interna (ventiladores, disipadores, filtros).</li>
+                        <li>Actualización de controladores y sistema operativo.</li>
+                        <li>Monitoreo de temperaturas y salud de discos.</li>
+                        <li>Desfragmentación (HDD) o TRIM (SSD).</li>
+                        <li>Revisión de eventos del sistema y copias de seguridad.</li>
+                    </ul>
+                    <!-- SVG gráfico de engranaje pequeño -->
+                    <div class="svg-graphic">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                            <g class="gear-small">
+                                <circle cx="30" cy="30" r="12" fill="none" stroke="#2a7fcc" stroke-width="3"/>
+                                <circle cx="30" cy="30" r="5" fill="#2a7fcc"/>
+                                <path d="M30 6 L30 16 M30 44 L30 54 M6 30 L16 30 M44 30 L54 30
+                                         M12 12 L18 18 M42 42 L48 48 M12 48 L18 42 M42 18 L48 12" 
+                                      stroke="#2a7fcc" stroke-width="4" stroke-linecap="round"/>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+                <div class="card reveal" style="transition-delay: 0.25s;">
+                    <h3>⚡ Correctivo</h3>
+                    <p>Actuamos cuando el <strong>fallo ya ha ocurrido</strong>. El objetivo es diagnosticar y reparar el problema lo antes posible:</p>
+                    <ul style="margin-left: 1.2rem; margin-top: 0.3rem;">
+                        <li>Diagnóstico de hardware (memoria, fuente, placa base).</li>
+                        <li>Eliminación de virus y malware.</li>
+                        <li>Restauración de sistema o reinstalación de controladores.</li>
+                        <li>Reemplazo de componentes dañados (discos, RAM, fuente).</li>
+                        <li>Recuperación de datos y reparación de archivos del sistema.</li>
+                    </ul>
+                    <!-- SVG gráfico de rayo / alerta -->
+                    <div class="svg-graphic">
+                        <svg width="60" height="60" viewBox="0 0 60 60">
+                            <polygon points="35,5 15,35 28,35 22,55 45,25 32,25" fill="#f0b400" stroke="#d49c00" stroke-width="2">
+                                <animate attributeName="opacity" values="1;0.5;1" dur="1.5s" repeatCount="indefinite"/>
+                            </polygon>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <p class="reveal" style="margin-top: 1.5rem; color: #2a4b6a; background: #e2edfb; padding: 0.8rem 1.5rem; border-radius: 8px; border-left: 4px solid #2a7fcc;">
+                <strong>Recomendación:</strong> combina ambas estrategias. Un buen mantenimiento preventivo reduce drásticamente la necesidad de intervenciones correctivas.
+            </p>
+        </section>
+
+        <!-- ===== SECCIÓN HERRAMIENTAS ===== -->
+        <section id="herramientas">
+            <h2 class="reveal">Herramientas de mantenimiento y telemetría</h2>
+            <p class="reveal" style="margin-bottom: 1.8rem; font-size: 1.05rem; color: #1e3a5a;">
+                Programas de <strong>código abierto</strong> para Windows, ideales para monitorizar, limpiar y diagnosticar tu PC.
+            </p>
+
+            <!-- Gráfico SVG de barras (métricas) -->
+            <div class="svg-graphic reveal" style="margin-bottom: 2rem;">
+                <svg width="320" height="120" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="100" width="40" height="0" fill="#2a7fcc" class="bar-anim" style="animation-delay: 0.1s;" />
+                    <rect x="70" y="100" width="40" height="0" fill="#4a9eff" class="bar-anim" style="animation-delay: 0.3s;" />
+                    <rect x="120" y="100" width="40" height="0" fill="#6fb0ff" class="bar-anim" style="animation-delay: 0.5s;" />
+                    <rect x="170" y="100" width="40" height="0" fill="#2a7fcc" class="bar-anim" style="animation-delay: 0.7s;" />
+                    <rect x="220" y="100" width="40" height="0" fill="#4a9eff" class="bar-anim" style="animation-delay: 0.9s;" />
+                    <rect x="270" y="100" width="40" height="0" fill="#6fb0ff" class="bar-anim" style="animation-delay: 1.1s;" />
+                    <!-- Línea de base -->
+                    <line x1="10" y1="100" x2="320" y2="100" stroke="#ccc" stroke-width="2"/>
+                    <text x="10" y="115" font-size="10" fill="#555">CPU</text>
+                    <text x="60" y="115" font-size="10" fill="#555">RAM</text>
+                    <text x="108" y="115" font-size="10" fill="#555">DISCO</text>
+                    <text x="158" y="115" font-size="10" fill="#555">RED</text>
+                    <text x="208" y="115" font-size="10" fill="#555">GPU</text>
+                    <text x="258" y="115" font-size="10" fill="#555">TEMP</text>
+                </svg>
+                <p style="font-size:0.9rem; color:#2a4b6a; text-align:center; margin-top:0.2rem;">Métricas en tiempo real (simulación)</p>
+            </div>
+
+            <div class="tools-list">
+                <div class="tool-item reveal-stagger"><h3>CrystalDiskInfo <span class="badge">BSD</span></h3><p>Monitorea salud de discos (S.M.A.R.T.).</p><div class="url"><a href="https://crystalmark.info/en/software/crystaldiskinfo/" target="_blank">crystalmark.info</a></div></div>
+                <div class="tool-item reveal-stagger"><h3>Open Hardware Monitor <span class="badge">MPL</span></h3><p>Sensores de temperatura, voltajes y carga.</p><div class="url"><a href="https://openhardwaremonitor.org/" target="_blank">openhardwaremonitor.org</a></div></div>
+                <div class="tool-item reveal-stagger"><h3>Wireshark <span class="badge">GPL</span></h3><p>Analizador de protocolos de red.</p><div class="url"><a href="https://www.wireshark.org/" target="_blank">wireshark.org</a></div></div>
+                <div class="tool-item reveal-stagger"><h3>BleachBit <span class="badge">GPL</span></h3><p>Limpieza profunda de archivos temporales.</p><div class="url"><a href="https://www.bleachbit.org/" target="_blank">bleachbit.org</a></div></div>
+                <div class="tool-item reveal-stagger"><h3>Process Hacker <span class="badge">GPL</span></h3><p>Monitor de procesos y rendimiento.</p><div class="url"><a href="https://processhacker.sourceforge.io/" target="_blank">processhacker.sf.net</a></div></div>
+                <div class="tool-item reveal-stagger"><h3>HWMonitor <span class="badge">Free</span></h3><p>Alternativa libre: Open Hardware Monitor.</p><div class="url" style="font-size:0.85rem; color:#555;">Ver arriba</div></div>
+            </div>
+            <p class="reveal" style="margin-top: 2rem; background: #eef4fa; padding: 0.8rem 1.5rem; border-radius: 8px;">
+                <strong>Telemetría y métricas:</strong> además, Windows incluye el <strong>Monitor de Rendimiento</strong> (perfmon.msc) y el <strong>Administrador de tareas</strong> para visualizar uso de CPU, memoria, disco y red en tiempo real.
+            </p>
+        </section>
+
+        <!-- ===== SECCIÓN TIPS ===== -->
+        <section id="tips">
+            <h2 class="reveal">6 tips para mejorar el rendimiento en Windows</h2>
+            <ol class="tips-list">
+                <li class="reveal-stagger"><strong>Desactiva programas de inicio innecesarios:</strong> Abre el Administrador de tareas (Ctrl+Mayús+Esc) y ve a la pestaña "Inicio". Deshabilita todo aquello que no necesites al encender el equipo.</li>
+                <li class="reveal-stagger"><strong>Optimiza el almacenamiento:</strong> Si usas HDD, desfragmenta periódicamente (busca "Desfragmentar"). En SSD, asegúrate de que TRIM esté activo y evita la desfragmentación clásica.</li>
+                <li class="reveal-stagger"><strong>Limpia archivos temporales y caché:</strong> Usa la herramienta "Liberador de espacio en disco" o aplicaciones como BleachBit para eliminar basura acumulada.</li>
+                <li class="reveal-stagger"><strong>Actualiza controladores y Windows:</strong> Mantén tu sistema al día. Las actualizaciones incluyen mejoras de rendimiento y parches de seguridad.</li>
+                <li class="reveal-stagger"><strong>Ajusta el plan de energía:</strong> Ve a "Opciones de energía" y selecciona "Alto rendimiento" (o "Rendimiento máximo" en portátiles) para evitar limitaciones de CPU.</li>
+                <li class="reveal-stagger"><strong>Desactiva efectos visuales superfluos:</strong> En "Configuración avanzada del sistema" → "Opciones de rendimiento" → "Ajustar para obtener el mejor rendimiento" o desmarca animaciones y transparencias.</li>
+            </ol>
+            <p class="reveal" style="margin-top: 1.5rem; background: #dff0fa; padding: 0.6rem 1.2rem; border-radius: 6px; border-left: 4px solid #2a7fcc;">
+                💡 <strong>Consejo extra:</strong> reinicia tu PC al menos una vez por semana para liberar memoria y aplicar actualizaciones pendientes.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 · Soluciones Informáticas · Todos los derechos reservados</p>
+            <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 0.3rem;">
+                Contenido elaborado con fines educativos. Las herramientas son de código abierto y se recomienda verificar su licencia.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            // Intersection Observer para animaciones de scroll
+            const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -20px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+
+            // Re-evaluar barras SVG cuando entren en viewport (para reiniciar animación)
+            const barGraph = document.querySelector('.svg-graphic .bar-anim')?.closest('.svg-graphic');
+            if (barGraph) {
+                const barObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Forzar reflow para reiniciar animaciones
+                            const bars = entry.target.querySelectorAll('.bar-anim');
+                            bars.forEach(bar => {
+                                bar.style.animation = 'none';
+                                bar.offsetHeight; // reflow
+                                bar.style.animation = '';
+                            });
+                        }
+                    });
+                }, { threshold: 0.3 });
+                barObserver.observe(barGraph);
+            }
+        })();
+    </script>
+</body>
+</html>
